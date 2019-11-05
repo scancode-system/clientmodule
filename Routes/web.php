@@ -11,6 +11,12 @@
 |
 */
 
-Route::prefix('client')->group(function() {
-    Route::get('/', 'ClientController@index');
+Route::prefix('clients')->middleware('auth')->group(function() {
+	Route::get('', 'ClientController@index')->name('clients.index');
+	Route::get('create', 'ClientController@create')->name('clients.create');
+	Route::get('{client}/edit', 'ClientController@edit')->name('clients.edit');
+
+	Route::post('', 'ClientController@store')->name('clients.store');
+	Route::put('{client}', 'ClientController@update')->name('clients.update');
+	Route::delete('{client}/destroy', 'ClientController@destroy')->name('clients.destroy');		
 });
