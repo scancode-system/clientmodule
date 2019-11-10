@@ -38,4 +38,9 @@ class ClientRepository
 	}
 
 
+	public static function toSelect($value, $description){
+		return Client::pluck($description, $value);
+	}
+
+
 }
