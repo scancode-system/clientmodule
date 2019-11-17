@@ -24,10 +24,6 @@
 			{{ Form::text('cpf_cnpj', old('cpf_cnpj'), ['class' => 'form-control']) }}
 		</div>
 		<div class="form-group">
-			{{ Form::label('sku', 'Referência') }}
-			{{ Form::text('sku', old('sku'), ['class' => 'form-control']) }}
-		</div>
-		<div class="form-group">
 			{{ Form::label('buyer', 'Comprador') }}
 			{{ Form::text('buyer', old('buyer'), ['class' => 'form-control']) }}
 		</div>
