@@ -20,3 +20,9 @@ Route::prefix('clients')->middleware('auth')->group(function() {
 	Route::put('{client}', 'ClientController@update')->name('clients.update');
 	Route::delete('{client}/destroy', 'ClientController@destroy')->name('clients.destroy');		
 });
+
+
+Route::prefix('setting_client')->middleware('auth')->group(function() {
+	Route::put('', 'SettingClientController@update')->name('setting_client.update');
+
+});

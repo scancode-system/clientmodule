@@ -3,9 +3,18 @@
 namespace Modules\Client\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Modules\Client\Repositories\SettingClientRepository;
 
 class ClientRequest extends FormRequest
 {
+
+
+    private $setting_client;
+
+    public function __construct() {
+        $this->setting_client = SettingClientRepository::load();
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -13,14 +22,13 @@ class ClientRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
-            'corporate_name' => 'nullable|string|max:255|unique:clients,corporate_name'.(isset($this->id)?','.$this->id.',id':''),
+            'corporate_name' => $this->setting_client->corporate_name_required.'|string|max:255|unique:clients,corporate_name'.(isset($this->id)?','.$this->id.',id':''),
             'fantasy_name' => 'nullable|string|max:255',
-            'cpf_cnpj' => 'nullable|string|unique:clients,cpf_cnpj'.(isset($this->id)?','.$this->id.',id':''),                // tem que fazer um custom para este
-            'buyer' => 'nullable|string|max:255',
-            'email' => 'nullable|string|email|max:255',
-            'phone' => 'nullable|string|max:255',
+            'cpf_cnpj' => $this->setting_client->cpf_cnpj_required.'|string|unique:clients,cpf_cnpj'.(isset($this->id)?','.$this->id.',id':''),                // tem que fazer um custom para este
+            'buyer' => $this->setting_client->buyer_required.'|string|max:255',
+            'email' => $this->setting_client->email_required.'|string|email|max:255',
+            'phone' => $this->setting_client->phone_required.'|string|max:255',
             'street' => 'nullable|string|max:255',
             'number' => 'nullable|integer|min:0',
             'apartment' => 'nullable|string|max:255',

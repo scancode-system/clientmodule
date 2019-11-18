@@ -1,4 +1,5 @@
 <tr>
+		<td class="align-middle">#{{ $client->id }}</td>
 	<td class="align-middle">{{ $client->corporate_name }}</td>
 	<td class="align-middle">{{ $client->cpf_cnpj }}</td>
 	<td class="align-middle">{{ $client->buyer }}</td>

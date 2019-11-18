@@ -1,5 +1,6 @@
 <thead>
 	<tr>
+		<th>Cod</th>
 		<th>Razão Social</th>
 		<th>CPF/CNPJ</th>
 		<th>Comprador</th>
