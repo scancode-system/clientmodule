@@ -6,7 +6,7 @@
 @else
 {{ Form::open(['route' => 'clients.store']) }}
 @endif
-
+ 
 <div class="row">
 	<div class="col-md-6">
 		<h5>Dados</h5>
@@ -35,6 +35,15 @@
 			{{ Form::label('phone', 'Telefone') }}
 			{{ Form::text('phone', old('phone'), ['class' => 'form-control']) }}
 		</div>
+		<div class="form-group">
+			{{ Form::label('shipping_company_id', 'Transportadora') }}
+			<div class="input-group">
+				<span class="input-group-prepend" data-toggle="modal" data-target="#modal_create_shipping_companies">
+					{{ Form::button('<i class="fa fa-plus-square-o"></i>', ['class' => 'btn btn-primary']) }}
+				</span>
+				{{ Form::select('shipping_company_id', $select_shipping_companies, old('shipping_company_id'), ['class' => 'form-control', 'placeholder' => 'Selecione uma transportadora']) }}
+			</div>
+		</div>	
 	</div>
 	<div class="col-md-6">
 		<h5>Endereço</h5>
@@ -73,3 +82,4 @@
 	{{ Form::button('<i class="fa fa-save"></i><span>Salvar</span>', ['class' => 'btn btn-brand btn-primary', 'type' => 'submit']) }}
 </div>
 {{ Form::close() }}
+@include('client::modals.modal_create_shipping_companies')

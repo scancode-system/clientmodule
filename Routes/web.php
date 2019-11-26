@@ -26,3 +26,8 @@ Route::prefix('setting_client')->middleware('auth')->group(function() {
 	Route::put('', 'SettingClientController@update')->name('setting_client.update');
 
 });
+
+
+Route::prefix('shipping_companies')->middleware('auth')->group(function() {
+	Route::post('', 'ShippingCompanyController@store')->name('shipping_companies.store');
+}); 

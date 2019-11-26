@@ -23,6 +23,9 @@ class CreateClientsTable extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
 
+            $table->unsignedBigInteger('shipping_company_id')->nullable();
+            $table->foreign('shipping_company_id')->references('id')->on('shipping_companies')->onDelete('set null')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
