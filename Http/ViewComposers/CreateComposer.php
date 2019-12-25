@@ -17,7 +17,7 @@ class CreateComposer extends ServiceComposer {
 
 
     private function selectShippingCompanies(){
-        $this->select_shipping_companies = ShippingCompanyRepository::toSelect('id', 'description');
+        $this->select_shipping_companies = ShippingCompanyRepository::toSelect('id', 'name');
     }
 
 

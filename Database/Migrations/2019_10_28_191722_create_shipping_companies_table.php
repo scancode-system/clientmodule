@@ -15,7 +15,7 @@ class CreateShippingCompaniesTable extends Migration
     {
         Schema::create('shipping_companies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('description')->unique();
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

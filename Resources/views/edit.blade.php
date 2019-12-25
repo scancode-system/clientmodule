@@ -9,8 +9,10 @@
 	<div class="card-body">
 		@alert_success()
 		@include('client::forms.form')
+		@loader(['loader_path' => 'clients.edit'])
 	</div>
 </div>
+
 
 @endsection
 
