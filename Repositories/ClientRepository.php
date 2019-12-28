@@ -7,7 +7,7 @@ use Modules\Client\Entities\Client;
 class ClientRepository
 {
 
-
+	// LOAD
 	public static function list($search = '', $limit = 10){
 		$clients =  Client::where('id', $search)->
 		orWhere('corporate_name', 'like', '%'.$search.'%')->
@@ -20,10 +20,22 @@ class ClientRepository
 		return $clients;
 	}
 
+	public static function toSelect($value, $description){
+		return Client::pluck($description, $value);
+	}
+
+	public static function clientByUniqueKeys($id, $corporate_name, $cpf_cnpj){
+		$client = Client::where('id', $id)->
+		orWhere('corporate_name', $corporate_name)->
+		orWhere('cpf_cnpj', $cpf_cnpj)->first();
+
+		return $client;
+	}
 
 	public static function store($data){
 		$client = Client::create($data);
 		$client->client_address->update($data['client_address']);
+		return $client;
 	}
 
 
@@ -36,11 +48,5 @@ class ClientRepository
 	public static function destroy(Client $client){
 		$client->delete();
 	}
-
-
-	public static function toSelect($value, $description){
-		return Client::pluck($description, $value);
-	}
-
 
 }
