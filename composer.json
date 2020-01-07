@@ -1,5 +1,5 @@
 {
-    "name": "nwidart/client",
+    "name": "scancode/client-module",
     "description": "",
     "authors": [
         {
@@ -21,5 +21,6 @@
         "psr-4": {
             "Modules\\Client\\": ""
         }
-    }
+    },
+    "type": "laravel-module"
 }
