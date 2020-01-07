@@ -7,13 +7,20 @@ use Modules\Client\Entities\ShippingCompany;
 class ShippingCompanyRepository
 {
 
+
+	// LOAD
+	public static function loadByName($name)
+	{
+		return ShippingCompany::where('name', $name)->first();
+	}
+
 	public static function toSelect($value, $description){
 		return ShippingCompany::pluck($description, $value);
 	}
 
 	public static function store($data){
-		ShippingCompany::create($data);
+		return ShippingCompany::create($data);
 	}
- 
+
 
 }

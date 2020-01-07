@@ -46,4 +46,9 @@ class ClientController extends Controller
         return back()->with('success', 'Clinte deletado.');
     }
 
+    public function import(Request $request)
+    {
+        return view('client::import');
+    }
+
 }

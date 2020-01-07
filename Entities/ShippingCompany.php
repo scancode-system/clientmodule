@@ -7,7 +7,7 @@ use Modules\Client\Entities\Client;
 
 class ShippingCompany extends Model
 {
-    protected $fillable = ['id', 'description'];
+    protected $fillable = ['id', 'name'];
 
     public function client()
 	{

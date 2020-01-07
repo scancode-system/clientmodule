@@ -15,6 +15,7 @@ Route::prefix('clients')->middleware('auth')->group(function() {
 	Route::get('', 'ClientController@index')->name('clients.index');
 	Route::get('create', 'ClientController@create')->name('clients.create');
 	Route::get('{client}/edit', 'ClientController@edit')->name('clients.edit');
+	Route::get('import', 'ClientController@import')->name('clients.import');
 
 	Route::post('', 'ClientController@store')->name('clients.store');
 	Route::put('{client}', 'ClientController@update')->name('clients.update');

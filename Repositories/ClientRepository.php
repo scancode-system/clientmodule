@@ -42,6 +42,7 @@ class ClientRepository
 	public static function update(Client $client, $data){
 		$client->update($data);
 		$client->client_address->update($data['client_address']);
+		return $client;
 	}
 
 
