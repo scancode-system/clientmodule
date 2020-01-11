@@ -8,6 +8,17 @@ class ClientRepository
 {
 
 	// LOAD
+	public static function load($id = null)
+	{
+		if(is_null($id))
+		{
+			return Client::with('client_address')->get();		
+		} else 
+		{
+			return Client::with('client_address')->find($id); 
+		}
+	}
+
 	public static function list($search = '', $limit = 10){
 		$clients =  Client::where('id', $search)->
 		orWhere('corporate_name', 'like', '%'.$search.'%')->

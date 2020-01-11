@@ -15,7 +15,7 @@ class ShippingCompanyRequest extends FormRequest
     {
 
         return [
-            'description' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
         ];
     }
 

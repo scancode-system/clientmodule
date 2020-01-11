@@ -10,8 +10,8 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					{{ Form::label('description', 'Descrição') }}
-					{{ Form::text('description', null, ['class' => 'form-control']) }}
+					{{ Form::label('name', 'Descrição') }}
+					{{ Form::text('name', null, ['class' => 'form-control']) }}
 				</div>
 			</div>
 			<div class="modal-footer">
