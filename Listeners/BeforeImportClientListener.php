@@ -36,12 +36,27 @@ class BeforeImportClientListener
 
     private function shippingCompanyId($shipping_company_id, $shipping_company_name)
     {
+        $shipping_company = ShippingCompanyRepository::loadById($shipping_company_id);
+        if($shipping_company)
+        {
+            return $shipping_company->id;
+        }
+
         $shipping_company = ShippingCompanyRepository::loadByName($shipping_company_name);
         if(!$shipping_company)
         {
-            $shipping_company = ShippingCompanyRepository::store(['id' => $shipping_company_id, 'name' => $shipping_company_name]);
+            if(!is_null($shipping_company_name))
+            {
+                $shipping_company = ShippingCompanyRepository::store(['id' => $shipping_company_id, 'name' => $shipping_company_name]);
+            }
         } 
-        return $shipping_company->id;   
+        if($shipping_company)
+        {
+            return $shipping_company->id;
+        } else
+        {
+            return null;
+        }
     }
 
 }

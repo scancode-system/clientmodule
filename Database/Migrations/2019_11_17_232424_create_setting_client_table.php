@@ -23,6 +23,8 @@ class CreateSettingClientTable extends Migration
             $table->boolean('phone')->default(1);
             $table->boolean('email')->default(1);
 
+            $table->boolean('validation_cpf_cnpj')->default(1);
+
             $table->timestamps();
         });
     }

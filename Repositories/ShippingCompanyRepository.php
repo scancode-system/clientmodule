@@ -20,9 +20,20 @@ class ShippingCompanyRepository
 		}
 	}
 
+	public static function loadById($id)
+	{
+		return ShippingCompany::find($id); 
+	}
+
 	public static function loadByName($name)
 	{
 		return ShippingCompany::where('name', $name)->first();
+	}
+
+	public static function loadByUniqueKeys($id, $name)
+	{
+		return ShippingCompany::where('id', $id)->
+		orWhere('name', $name)->first();
 	}
 
 	public static function toSelect($value, $description){
@@ -31,6 +42,11 @@ class ShippingCompanyRepository
 
 	public static function store($data){
 		return ShippingCompany::create($data);
+	}
+
+	public static function update($shipping_company, $data){
+		$shipping_company->update($data);
+		return $shipping_company;
 	}
 
 

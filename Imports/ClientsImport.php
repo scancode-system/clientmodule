@@ -82,6 +82,7 @@ class ClientsImport implements OnEachRow, WithHeadingRow, WithEvents
 
 	public static function beforeImport(BeforeImport $event)
 	{
+		SessionService::title('Client', 'import', 'Clientes'); 
 		$cells = $event->getDelegate()->getActiveSheet()->toArray();
 		$import = $event->getConcernable();
 		$import->data($cells);

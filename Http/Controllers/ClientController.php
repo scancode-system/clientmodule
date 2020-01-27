@@ -8,7 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Client\Http\Requests\ClientRequest;
 use Modules\Client\Repositories\ClientRepository;
 use Modules\Client\Entities\Client;
-
+ 
 class ClientController extends Controller
 {
 

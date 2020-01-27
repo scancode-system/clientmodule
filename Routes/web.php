@@ -31,4 +31,6 @@ Route::prefix('setting_client')->middleware('auth')->group(function() {
 
 Route::prefix('shipping_companies')->middleware('auth')->group(function() {
 	Route::post('', 'ShippingCompanyController@store')->name('shipping_companies.store');
+	Route::get('import', 'ShippingCompanyController@import')->name('clients.shipping_companies.import');
 }); 
+

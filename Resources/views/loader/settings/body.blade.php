@@ -18,14 +18,30 @@
 			</label>
 		</div>
 	</div>
-	<div class="form-group row">
-		{{ Form::label('cpf_cnpj', 'CPF/CNPJ', ['class' => 'col-sm-2 col-form-label']) }}
-		<div class="col-sm-10">
-			<label class="switch switch-primary switch-lg mb-0 ml-3">
-				{{ Form::hidden('cpf_cnpj', 0) }}
-				{{ Form::checkbox('cpf_cnpj', 1, null,['class' => 'switch-input']) }}
-				<span class="switch-slider"></span>
-			</label>
+	<div class="row">
+		<div class="col">
+			<div class="form-group row">
+				{{ Form::label('cpf_cnpj', 'CPF/CNPJ', ['class' => 'col-sm-4 col-form-label']) }}
+				<div class="col-sm-8">
+					<label class="switch switch-primary switch-lg mb-0 ml-3">
+						{{ Form::hidden('cpf_cnpj', 0) }}
+						{{ Form::checkbox('cpf_cnpj', 1, null,['class' => 'switch-input']) }}
+						<span class="switch-slider"></span>
+					</label>
+				</div>
+			</div>	
+		</div>
+		<div class="col">
+			<div class="form-group row">
+				{{ Form::label('validation_cpf_cnpj', 'Validação de CPF/CNPJ', ['class' => 'col-sm-5 col-form-label']) }}
+				<div class="col-sm-7">
+					<label class="switch switch-primary switch-lg mb-0 ml-3">
+						{{ Form::hidden('validation_cpf_cnpj', 0) }}
+						{{ Form::checkbox('validation_cpf_cnpj', 1, null,['class' => 'switch-input']) }}
+						<span class="switch-slider"></span>
+					</label>
+				</div>
+			</div>	
 		</div>
 	</div>
 	<div class="form-group row">

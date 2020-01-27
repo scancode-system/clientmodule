@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SettingClient extends Model
 {
 	protected $table = 'setting_client';
-	protected $fillable = ['id', 'client_start', 'corporate_name', 'cpf_cnpj', 'buyer', 'email', 'phone'];
+	protected $fillable = ['id', 'client_start', 'corporate_name', 'cpf_cnpj', 'buyer', 'email', 'phone', 'validation_cpf_cnpj'];
 
 	public function getCorporateNameRequiredAttribute()
 	{
@@ -32,6 +32,11 @@ class SettingClient extends Model
 	public function getPhoneRequiredAttribute()
 	{
 		return ($this->phone)?'required':'nullable';
+	}
+
+	public function getValidationCpfCnpjActiveAttribute()
+	{
+		return ($this->validation_cpf_cnpj)?'cpf_cnpj':'';
 	}
 
 }
