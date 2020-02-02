@@ -36,9 +36,17 @@ class ClientRepository
 	}
 
 	public static function clientByUniqueKeys($id, $corporate_name, $cpf_cnpj){
+		if(is_null($cpf_cnpj))
+		{
+		$client = Client::where('id', $id)->
+		orWhere('corporate_name', $corporate_name)->first();
+		} else 
+		{
 		$client = Client::where('id', $id)->
 		orWhere('corporate_name', $corporate_name)->
 		orWhere('cpf_cnpj', $cpf_cnpj)->first();
+		}
+
 
 		return $client;
 	}
