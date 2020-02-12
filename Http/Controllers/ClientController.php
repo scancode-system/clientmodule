@@ -51,4 +51,19 @@ class ClientController extends Controller
         return view('client::import');
     }
 
+    public function select(Request $request, $text)
+    {
+        $clients =  Client::where('id', $text)->
+        orWhere('corporate_name', 'like', '%'.$text.'%')->
+        orWhere('fantasy_name', 'like', '%'.$text.'%')->
+        orWhere('cpf_cnpj', $text)->limit(30)->get();
+
+        $response = [];
+        foreach ($clients as $client) {
+            array_push($response, ['id' => $client->id, 'text' => $client->corporate_name]);
+        }
+
+        return $response;
+    }
+
 }

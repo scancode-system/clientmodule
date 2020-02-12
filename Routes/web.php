@@ -17,6 +17,10 @@ Route::prefix('clients')->middleware('auth')->group(function() {
 	Route::get('{client}/edit', 'ClientController@edit')->name('clients.edit');
 	Route::get('import', 'ClientController@import')->name('clients.import');
 
+	Route::get('select/{text}', 'ClientController@select');
+
+	/*Route::get('select', 'ClientController@import')->name('clients.import');*/
+
 	Route::post('', 'ClientController@store')->name('clients.store');
 	Route::put('{client}', 'ClientController@update')->name('clients.update');
 	Route::delete('{client}/destroy', 'ClientController@destroy')->name('clients.destroy');		
