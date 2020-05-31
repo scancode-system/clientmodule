@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Facades\Validator;
 
 class ClientServiceProvider extends ServiceProvider 
-{
+{ 
     /**
      * Boot the application events.
      *
