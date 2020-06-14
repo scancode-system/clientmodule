@@ -1,8 +1,9 @@
-@modal_view(['modal_id' => 'clients_view_'.$client->id, 'edit_route' => 'clients.edit', 'model_id' => $client->id])
+<x-modal_view :modal-id="'clients_view_'.$client->id" edit-route="clients.edit" :model_id="$client->id">
 
 @slot('title')
 Cliente #{{ '1' }}
 @endslot
+
 <h5>Dados</h5>
 <div class="row justify-content-center mb-1">
 	<div class="col-md-5"><strong>Nome Fantasia: </strong></div>
@@ -58,6 +59,6 @@ Cliente #{{ '1' }}
 	<div class="col-md-5"><strong>CEP: </strong></div>
 	<div class="col-md-5">{{ $client->client_address->postcode }}</div>
 </div>
+</x-modal_view>
 
 
-@endmodal_view

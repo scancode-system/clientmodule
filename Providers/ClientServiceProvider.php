@@ -4,10 +4,19 @@ namespace Modules\Client\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use Illuminate\Support\Facades\Validator;
+
 
 class ClientServiceProvider extends ServiceProvider 
 { 
+    /**
+     * @var string $moduleName
+     */
+    protected $moduleName = 'Client';
+
+    /**
+     * @var string $moduleNameLower
+     */
+    protected $moduleNameLower = 'client';
     /**
      * Boot the application events.
      *
@@ -18,58 +27,6 @@ class ClientServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
-        Validator::extend('cpf_cnpj', function ($attribute, $value, $parameters, $validator) {
-            $value = preg_replace('/[^0-9]/', '', (string) $value);
-
-            if (strlen($value) == 14){
-                $cnpj = $value;
-                for ($i = 0, $j = 5, $soma = 0; $i < 12; $i++)
-                {
-                    $soma += $cnpj{$i} * $j;
-                    $j = ($j == 2) ? 9 : $j - 1;
-                }
-                $resto = $soma % 11;
-                if ($cnpj{12} != ($resto < 2 ? 0 : 11 - $resto))
-                    return false;
-
-                for ($i = 0, $j = 6, $soma = 0; $i < 13; $i++)
-                {
-                    $soma += $cnpj{$i} * $j;
-                    $j = ($j == 2) ? 9 : $j - 1;
-                }
-
-                $resto = $soma % 11;
-                return $cnpj{13} == ($resto < 2 ? 0 : 11 - $resto);
-
-            } else if (strlen($value) == 11){
-                $cpf = $value;
-
-                for ($i = 0, $j = 10, $soma = 0; $i < 9; $i++, $j--){
-                    $soma += $cpf{$i} * $j;
-                }
-
-                $resto = $soma % 11;
-                if ($cpf{9} != ($resto < 2 ? 0 : 11 - $resto)){
-                    return false;
-                }
-
-                for ($i = 0, $j = 11, $soma = 0; $i < 10; $i++, $j--){
-                    $soma += $cpf{$i} * $j;
-                }
-
-                $resto = $soma % 11;
-                return $cpf{10} == ($resto < 2 ? 0 : 11 - $resto);
-
-            } else {
-                return false;
-            }
-
-
-    // Valida segundo dígito verificador
-
-            return $cnpj{13} == ($resto < 2 ? 0 : 11 - $resto);
-            return false;
-        });
     }
 
     /**
@@ -83,6 +40,7 @@ class ClientServiceProvider extends ServiceProvider
         $this->app->register(ViewComposerServiceProvider::class);
         $this->app->register(ObserverServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
+        $this->app->register(ValidationServiceProvider::class);
     }
 
 
@@ -93,7 +51,7 @@ class ClientServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/client');
+        /*$viewPath = resource_path('views/modules/client');
 
         $sourcePath = __DIR__.'/../Resources/views';
 
@@ -103,7 +61,17 @@ class ClientServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/client';
-        }, \Config::get('view.paths')), [$sourcePath]), 'client');
+        }, \Config::get('view.paths')), [$sourcePath]), 'client');*/
+
+        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
+
+        $sourcePath = module_path($this->moduleName, 'Resources/views');
+
+        $this->publishes([
+            $sourcePath => $viewPath
+        ], ['views', $this->moduleNameLower . '-module-views']);
+
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 
 
@@ -114,8 +82,12 @@ class ClientServiceProvider extends ServiceProvider
      */
         public function registerFactories()
         {
-            if (! app()->environment('production') && $this->app->runningInConsole()) {
+            /*if (! app()->environment('production') && $this->app->runningInConsole()) {
                 app(Factory::class)->load(__DIR__ . '/../Database/factories');
+            }*/
+
+            if (! app()->environment('production') && $this->app->runningInConsole()) {
+                app(Factory::class)->load(module_path($this->moduleName, 'Database/factories'));
             }
         }
 
@@ -127,5 +99,16 @@ class ClientServiceProvider extends ServiceProvider
     public function provides()
     {
         return [];
+    }
+
+    private function getPublishableViewPaths(): array
+    {
+        $paths = [];
+        foreach (\Config::get('view.paths') as $path) {
+            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
+                $paths[] = $path . '/modules/' . $this->moduleNameLower;
+            }
+        }
+        return $paths;
     }
 }
