@@ -35,7 +35,7 @@ class ClientsImport implements OnEachRow, WithHeadingRow, WithEvents
 			$client_data = $this->parse($row->toArray());
 
 			$client_data = $this->beforeSave($client_data);
-			$client = ClientRepository::clientByUniqueKeys($client_data['id'], $client_data['corporate_name'], $client_data['cpf_cnpj']);
+			$client = ClientRepository::clientByUniqueKeys($client_data['id'], $client_data['cpf_cnpj']);
 			if($client){
 				$client = ClientRepository::update($client, $client_data);
 				SessionService::updated('Client', 'import', true, 'Cliente '.$client->id.' atualizado: '. json_encode($client->toJson())."\r\n");
